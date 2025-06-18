@@ -16,19 +16,20 @@
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-      await OneSignal.init({
-        appId: "afc1c464-2c86-4012-afa2-0f02f3787bd4",
-        notifyButton: { enable: false }
-      });
-      window.OneSignal = OneSignal; // para acceder fuera de la función
-    
-    });
-    OneSignal.Notifications.permission.then(function(permission) {
-        if (permission === 'denied') {
-          alert("Parece que tienes bloqueadas las notificaciones. Ve a los ajustes de tu navegador y actívalas para no perderte nuestras promociones.");
-        }
-      });
+window.OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: "afc1c464-2c86-4012-afa2-0f02f3787bd4",
+    notifyButton: { enable: false }
+  });
+
+  const permiso = await OneSignal.Notifications.permission;
+  if (permiso === "denied") {
+    alert("Parece que tienes bloqueadas las notificaciones. Ve a los ajustes de tu navegador y actívalas para no perderte nuestras promociones.");
+  }
+
+  window.OneSignal = OneSignal; // para usar luego
+});
+
 
   function activarNotificaciones() {
     window.OneSignalDeferred.push(async function(OneSignal) {
