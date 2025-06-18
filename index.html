@@ -28,11 +28,11 @@
       window.OneSignal = OneSignal;
     });
 
-    function activarNotificaciones() {
-      window.OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.Notifications.showSlidedownPrompt();
-      });
-    }
+   function activarNotificaciones() {
+    window.OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.Notifications.requestPermission();
+    });
+  }
   </script>
 
   <style>
