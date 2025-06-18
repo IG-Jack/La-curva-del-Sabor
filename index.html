@@ -13,7 +13,14 @@
       await OneSignal.init({
         appId: "afc1c464-2c86-4012-afa2-0f02f3787bd4",
       });
+      window.OneSignal = OneSignal; // para acceder fuera de la función
     });
+
+    function activarNotificaciones() {
+      OneSignal.push(function() {
+        OneSignal.registerForPushNotifications();
+      });
+    }
   </script>
 
   <style>
@@ -42,6 +49,6 @@
 <body>
   <h1>🔥 Promociones La Curva del Sabor</h1>
   <p>Activa las notificaciones y recibe nuestras ofertas del día.</p>
-  <button onclick="OneSignal.showSlidedownPrompt()">Activar Notificaciones</button>
+  <button onclick="activarNotificaciones()">Activar Notificaciones</button>
 </body>
 </html>
