@@ -12,23 +12,11 @@
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "afc1c464-2c86-4012-afa2-0f02f3787bd4",
-        promptOptions: {
-          slidedown: {
-            enabled: true,
-            actionMessage: "¿Te gustaría recibir nuestras ofertas especiales?",
-            acceptButtonText: "¡Claro que sí!",
-            cancelButtonText: "No, gracias"
-          }
-        },
-        // notificationIcon: "public/img/loguito.jpg",  <-- esta línea está comentada
-        notifyButton: {
-          enable: false
-        }
       });
-      window.OneSignal = OneSignal;
+      window.OneSignal = OneSignal; // para acceder fuera de la función
     });
 
-   function activarNotificaciones() {
+  function activarNotificaciones() {
     window.OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.Notifications.requestPermission();
     });
