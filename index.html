@@ -12,15 +12,27 @@
     OneSignalDeferred.push(async function(OneSignal) {
       await OneSignal.init({
         appId: "afc1c464-2c86-4012-afa2-0f02f3787bd4",
+        promptOptions: {
+          slidedown: {
+            enabled: true,
+            actionMessage: "¿Te gustaría recibir nuestras ofertas especiales?",
+            acceptButtonText: "¡Claro que sí!",
+            cancelButtonText: "No, gracias"
+          }
+        },
+        notificationIcon: "/img/loquito.jpg",
+        notifyButton: {
+          enable: false
+        }
       });
-      window.OneSignal = OneSignal; // para acceder fuera de la función
+      window.OneSignal = OneSignal;
     });
 
-  function activarNotificaciones() {
-    window.OneSignalDeferred.push(async function(OneSignal) {
-      await OneSignal.Notifications.requestPermission();
-    });
-  }
+    function activarNotificaciones() {
+      window.OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.Notifications.showSlidedownPrompt();
+      });
+    }
   </script>
 
   <style>
